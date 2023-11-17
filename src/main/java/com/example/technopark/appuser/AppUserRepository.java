@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-@Transactional()
+@Transactional(readOnly = true)
 public interface AppUserRepository {
     Optional<AppUser> findByEmail(String email);
 }
