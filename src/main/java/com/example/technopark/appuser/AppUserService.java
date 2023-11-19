@@ -3,6 +3,7 @@ package com.example.technopark.appuser;
 import com.example.technopark.registration.token.ConfirmationToken;
 import com.example.technopark.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -38,7 +39,6 @@ public class AppUserService implements UserDetailsService {
         appUser.setPassword(encodedPassword);
 
         appUserRepository.save(appUser);
-
         String token = UUID.randomUUID().toString();
         ConfirmationToken confirmationToken = new ConfirmationToken(
                 token,
@@ -49,5 +49,9 @@ public class AppUserService implements UserDetailsService {
         confirmationTokenService.saveConfirmationToken(confirmationToken);
         //TODO send email
         return token;
+    }
+
+    public int enableAppUser(String email) {
+        return appUserRepository.enableAppUser(email);
     }
 }

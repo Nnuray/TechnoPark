@@ -12,12 +12,15 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
 
+
 @Getter
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
-@Entity(name = "app_user")
+@Entity
 public class AppUser implements UserDetails {
+
+
     @SequenceGenerator(
             name = "student_sequence",
             sequenceName = "student_sequence",
@@ -52,7 +55,8 @@ public class AppUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(appUserRole.name());
+        SimpleGrantedAuthority authority =
+                new SimpleGrantedAuthority(appUserRole.name());
         return Collections.singletonList(authority);
     }
 
